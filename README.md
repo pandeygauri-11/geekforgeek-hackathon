@@ -60,7 +60,17 @@ The system uses Conversational AI to understand user queries and generate insigh
 
 ```bash
 git clone https://github.com/your-username/your-repo-name.git
+---
 
+✅ **Tip for GitHub:**  
+After creating the file:
+
+1. Right click in project folder  
+2. Create file **README.md**  
+3. Paste this content  
+4. Commit & push to GitHub
+
+---
 
 
 
