@@ -72,7 +72,76 @@ After creating the file:
 
 ---
 
+1. SYSTEM ARCHITECTURE
 
+                USER
+                  |
+                  v
+        ----------------------
+        |   Streamlit UI     |
+        |   (Frontend)       |
+        ----------------------
+                  |
+                  | HTTP Request
+                  v
+        ----------------------
+        |   FastAPI Server   |
+        |   backend/main.py  |
+        ----------------------
+                  |
+                  v
+        -----------------------------
+        | Dashboard Controller      |
+        | api/dashboard.py          |
+        -----------------------------
+                  |
+                  v
+        -----------------------------
+        | Dashboard Planner         |
+        | dashboard_planner.py      |
+        -----------------------------
+                  |
+                  v
+        -----------------------------
+        | SQL Generation Engine     |
+        | sql_generator.py          |
+        -----------------------------
+           |                     |
+           v                     v
+
+  -----------------------------------------
+  | Schema Reader | |     | Intent Engine |
+  schema_reader |         | intent_engine |
+  ---------------------- ------------------
+  | v                    
+
+  -----------------------------------------
+
+  | Context Retrieval (RAG) |
+  -----------------------------
+  |
+  v
+
+| SQL Sanitizer | | SQL Validator | ————————— | v ————————— | SQLite
+Database | | marketing.db | ————————— | v ————————— | Chart Selector | |
+chart_selector.py | ————————— | v ————————— | Dashboard Builder | |
+dashboard_builder.py | ————————— | v JSON RESPONSE | v ————————— |
+Streamlit Chart Render | | Plotly Visualization | —————————
+
+2. BACKEND ARCHITECTURE
+
+backend/ │ ├── api │ └── dashboard.py │ ├── database │ ├── db.py │ └──
+schema_reader.py │ ├── services │ ├── dashboard_planner.py │ ├──
+sql_generator.py │ ├── chart_selector.py │ ├── sql_validator.py │ ├──
+sql_sanitizer.py │ ├── sql_corrector.py │ └── dashboard_builder.py │ ├──
+ai │ ├── intent_engine.py │ ├── context_retriever.py │ ├──
+data_profiler.py │ └── embedding_builder.py │ └── utils └── config.py
+
+3. FRONTEND ARCHITECTURE
+
+frontend/ │ ├── app.py │ ├── components │ ├── chart_renderer.py │ └──
+dashboard_layout.py │ ├── services │ └── api_client.py │ ├── config │
+└── settings.py │ └── utils └── helpers.py
 
 
 
